@@ -1,0 +1,97 @@
+SETUP:
+SHADCN: for UI design and import front end components like header, sheets etc 
+CLERK: for authentication and user login
+WEBHOOKS: as soon as a user acoounted is created(trigger occured) and stored in clerk, it will be reflected(action for the trigger) in db using webhooks.
+
+create next project using
+    npx create-next-app@latest ./
+run project using 
+    npm run dev
+now install shadcn using:
+    npx shadcn-ui@latest init
+    npx shadcn-ui@latest add button
+install tailwind css intellisense extension
+copy global.css, tailwind.config from github folder.
+npm install uploadthing @uploadthing/react
+creat root folder in app to store pages 
+also make auth folder and add subfolder sign in for future use
+
+change code in layout for font 
+add icon in layout.tsx
+
+create another layout in root to make other pages 
+
+
+create folder in components-> shared->header,footer etc
+to make new react component type rafce using e7s+ extension
+
+
+import header,footer in root layout
+
+now make header:
+
+all css is already done in globals.css
+add link, image and use clerk for authentication.
+follow steps for downloading clerk and create .env.local file in project to store keys
+create middleware.ts as shown in clerk. also import clerkprovider in app layout
+to add more ways of signing in like github etc, go to users in clerk and add social accounts
+
+now modify middleware to add public pages that can be accessed without signing in
+
+create sign in and sign up folder inside auth folder.
+
+now create authentication in header and create mobilenav, navitems file in components->shared 
+
+use shadcn to add sheets in mobilenav and write code that brings pop up sheet from right side of screen
+
+create constants folder and idex.ts file to have a array for pages and links 
+now write navitems code: to have a button and links to the route 
+
+FOOTER(components): type cntrl+P and write footer to get footer tmeplate 
+write simple footer code to print whatever you want at footer
+
+write code for APP-> page.tsx(HOME PAGE) wrte text, images and function for 
+
+NOW LETS START FOR BACKEND
+MONGOOSE:
+create a newfolder lib->mongodb->databse-> index.ts(setup for database connection)
+run: npm install mongoose mongodb  
+
+we will write a pattern code of node js that is used to connect db in serverless environment like vercel and fetch details from apis
+open mongodb atlas on google and login. create a new project called evently
+now add username password and choose local environment and finish.
+go to network access and add ip address and allow from any location.
+go to overview and click connect. connect with mongo driver . copy the connection string and paste in .env.local file and replace password as original password 
+go to database and click on browse connections to see dataset
+
+create new folder lib->database->models and create file user.model.ts
+this file will hold schema of all the user detials and their data type. this schema will be based on mongodb 
+create file in same folder as event.model.ts to add schema of detials of the events that will occur
+
+WEBHOOKS:  (route.ts)used to perfom a action when a trigger occurs (creation, addition, updation)
+go to clerk documentation on connection to backend using webhook 
+go to dashboard and click on webhook and create endpoint 
+https://clerk.com/docs/users/sync-data
+npm install svix
+follow create endpoint code and step as per documentation 
+create app\api\webhook\clerk\route.ts and paste code from documentation
+
+create new file lib/actions/user.action.ts to create server action file 
+create new file types/index.ts to hold properties passing through webhook 
+
+modify lib/utils.ts to add various utilites to our project
+
+now create files:
+/lib/database/models/order.model,category,event,user .
+
+
+
+
+
+
+
+
+
+
+
+

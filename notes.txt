@@ -84,14 +84,63 @@ modify lib/utils.ts to add various utilites to our project
 now create files:
 /lib/database/models/order.model,category,event,user .
 
+front end is ready
+DEPLOYMENT:
+create github repo, and create new project in vercel and import the git repo 
+now push the codes to git using:
+git init
+git add .
+git commit -m 'first commit'
+git branch -M main
+git remote add origin https://github.com/manishh-sharma/event_platform.git
+git push -u origin main
+
+go to vercel, import the git project, click on framework and choose next js, then add env variables by  copy pasting the content of .env.local file and deploy
+add endpoint to clerk website and choose users as neccesary. add the secret key as WEBHOOK_SECRET = whsec_AHOxAH14QwdIovgCzoh0WuPewUYhyXWD
+also add the webhook_key to env variables in vercel settings and redeploy(always do this)
+
+go to app -> root -> create folder events  -> create-> page.tsx 
+go to components-> create shared folder -> Eventform.tsx 
+create folder and file: app/(root)/events/[id]/update and make page.tsx for updating events 
+eventform is most complex component. get it from shadcn for react-hook-form 
+https://ui.shadcn.com/docs/components/form . keep pasting code in eventform  in components 
+    npx shadcn-ui@latest add form
+    npx shadcn-ui@latest add input 
+in lib. create validator.ts to validate the form for minimum and correct detials 
+to create a dropdown input in eventform, add dropdown.tsx in shared in components.
+use shadcn to create a dropdown and inport, select, dialog, etc 
+
+create fileuploader.tsx in component/shared to upload files for image
+go to uploadthing.com and install using https://docs.uploadthing.com/
+create project and copy api keys in env.local 
+create file app\api\uploadthing\core.ts , app\api\uploadthing\route.ts
 
 
+create lib/actions/category.actions.ts to handle all actions related to creating category 
+create lib/actions/events.actions.ts to handle all actions related to creating events  
 
+create app\(root)\events\[id]\page.tsx to show single event details and book 
+to allow our project to print images. make changes to next.config.js 
 
+create Collection.tsx in components/shared to display list of events in home page 
+create Card.tsx in components/shared to display single event in a card 
+create DeleteConfirmation.tsx in components/shared to confirm if we are deleting a event 
 
+to get suggested events. write code in app\(root)\events\[id]\page.tsx
+create app/root/profile/page.tsx to make profile page. about tickets and my events
 
+create checkoutEvent and checkoutbutton in components 
 
+setup stripe on official site using nextjs doumentation 
+create checkout using stripe.docs -> payment -> checkout using next js. copy checkout_session code in order.actions.js
+paste the env variables in .env 
+create order.actions.js in lib for perform order operations 
+create app/api/webhook/stripe/route.ts 
+create endpoint of deployed link in stripe and get secret key 
 
+create app\(root)\orders\page.tsx to show orders 
+create categoryFilter.tsx\shared\components to categorize based on filters 
+create Pagination.tsx\shared\components to categorize based on filters 
 
 
 

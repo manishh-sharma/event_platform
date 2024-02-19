@@ -1,7 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
-import { createUser, updateUser, deleteUser } from '@/lib/actions/user.actions'
+import { WebhookEvent } from '@clerk/nextjs/server'
+import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
+import { clerkClient } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
  
 export async function POST(req: Request) {
@@ -53,11 +54,9 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
  
-  //if user is created
   if(eventType === 'user.created') {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
-    //add data to user
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -66,10 +65,9 @@ export async function POST(req: Request) {
       lastName: last_name,
       photo: image_url,
     }
-    //to create a new user
+
     const newUser = await createUser(user);
 
-    //if new user is created, make a db connection to oiur clerk model by user id
     if(newUser) {
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
@@ -78,7 +76,6 @@ export async function POST(req: Request) {
       })
     }
 
-    //send ok msg
     return NextResponse.json({ message: 'OK', user: newUser })
   }
 
@@ -104,6 +101,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'OK', user: deletedUser })
   }
+ 
   return new Response('', { status: 200 })
 }
  
